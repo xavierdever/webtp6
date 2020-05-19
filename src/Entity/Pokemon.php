@@ -63,6 +63,14 @@ class Pokemon
      */
     private $dresseurid;
 
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="disponibleEntrainement", type="boolean")
+     */
+    private $disponibleEntrainement;
+
+
     public function getIdp(): ?int
     {
         return $this->idp;
@@ -136,6 +144,18 @@ class Pokemon
     public function setDresseurid(int $dresseurid): self
     {
         $this->dresseurid = $dresseurid;
+
+        return $this;
+    }
+
+    public function getDisponibleEntrainement(): ?bool
+    {
+        return $this->disponibleEntrainement;
+    }
+
+    public function setDisponibleEntrainement(bool $disponibleEntrainement): self
+    {
+        $this->disponibleEntrainement = $disponibleEntrainement;
 
         return $this;
     }

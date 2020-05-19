@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RefPokemonType{% endblock %}
+
+{% block body %}
+    <h1>RefPokemonType</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ref_pokemon_type.id }}</td>
+            </tr>
+            <tr>
+                <th>Type2</th>
+                <td>{{ ref_pokemon_type.type2 }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ ref_pokemon_type.nom }}</td>
+            </tr>
+            <tr>
+                <th>Evolution</th>
+                <td>{{ ref_pokemon_type.evolution ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Starter</th>
+                <td>{{ ref_pokemon_type.starter ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>TypeCourbeNiveau</th>
+                <td>{{ ref_pokemon_type.typeCourbeNiveau }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ref_pokemon_type_index') }}">back to list</a>
+
+    <a href="{{ path('ref_pokemon_type_edit', {'id': ref_pokemon_type.id}) }}">edit</a>
+
+    {{ include('ref_pokemon_type/_delete_form.html.twig') }}
+{% endblock %}

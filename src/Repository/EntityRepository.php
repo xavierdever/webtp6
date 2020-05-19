@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\PokemonType;
+use App\Entity\RefPokemonType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method PokemonType|null find($id, $lockMode = null, $lockVersion = null)
- * @method PokemonType|null findOneBy(array $criteria, array $orderBy = null)
- * @method PokemonType[]    findAll()
- * @method PokemonType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method RefPokemonType|null find($id, $lockMode = null, $lockVersion = null)
+ * @method RefPokemonType|null findOneBy(array $criteria, array $orderBy = null)
+ * @method RefPokemonType[]    findAll()
+ * @method RefPokemonType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EntityRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PokemonType::class);
+        parent::__construct($registry, RefPokemonType::class);
     }
 
     /**
@@ -35,7 +35,7 @@ UNION
     }
 
     /**
-     * @return PokemonType[] Returns an array of PokemonType objects
+     * @return RefPokemonType[] Returns an array of PokemonType objects
      */
     public function getNbEvo(){
         $t = $this->findBy(["evolution"=> true]);
@@ -43,7 +43,7 @@ UNION
     }
 
     // /**
-    //  * @return PokemonType[] Returns an array of PokemonType objects
+    //  * @return RefPokemonType[] Returns an array of RefPokemonType objects
     //  */
     /*
     public function findByExampleField($value)
@@ -60,7 +60,7 @@ UNION
     */
 
     /*
-    public function findOneBySomeField($value): ?PokemonType
+    public function findOneBySomeField($value): ?RefPokemonType
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
