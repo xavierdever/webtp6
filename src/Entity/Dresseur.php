@@ -49,5 +49,58 @@ class Dresseur
      */
     private $pieces;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getMdp(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setMdp(string $mdp): self
+    {
+        $this->mdp = $mdp;
+
+        return $this;
+    }
+
+    public function getPieces(): ?int
+    {
+        return $this->pieces;
+    }
+
+    public function setPieces(int $pieces): self
+    {
+        $this->pieces = $pieces;
+
+        return $this;
+    }
+
 
 }

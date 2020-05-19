@@ -63,5 +63,82 @@ class Pokemon
      */
     private $dresseurid;
 
+    public function getIdp(): ?int
+    {
+        return $this->idp;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    public function getXp(): ?int
+    {
+        return $this->xp;
+    }
+
+    public function setXp(int $xp): self
+    {
+        $this->xp = $xp;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?int
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(int $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getPrixVente(): ?int
+    {
+        return $this->prixVente;
+    }
+
+    public function setPrixVente(int $prixVente): self
+    {
+        $this->prixVente = $prixVente;
+
+        return $this;
+    }
+
+    public function getDresseurid(): ?int
+    {
+        return $this->dresseurid;
+    }
+
+    public function setDresseurid(int $dresseurid): self
+    {
+        $this->dresseurid = $dresseurid;
+
+        return $this;
+    }
+
 
 }
