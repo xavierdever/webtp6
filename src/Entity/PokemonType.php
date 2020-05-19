@@ -25,13 +25,13 @@ class PokemonType
 
     /**
      * @ORM\ManyToOne(targetEntity="ElementaryType")
-     * @ORM\JoinColumn(name="type_1", referencedColumnName="libelle")
+     * @ORM\JoinColumn(name="type_1", referencedColumnName="id")
      */
     private $type1;
 
     /**
      * @ORM\ManyToOne(targetEntity="ElementaryType")
-     * @ORM\JoinColumn(name="type_2", referencedColumnName="libelle",nullable=true)
+     * @ORM\JoinColumn(name="type_2", referencedColumnName="id",nullable=true)
      */
     private $type2;
 
