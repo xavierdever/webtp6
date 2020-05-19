@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 08:21
+-- Généré le :  mar. 19 mai 2020 à 10:41
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -56,8 +56,7 @@ CREATE TABLE IF NOT EXISTS `migration_versions` (
 --
 
 INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
-('20200518093241', '2020-05-18 22:46:39'),
-('20200518224614', '2020-05-19 07:07:24');
+('20200519102046', '2020-05-19 10:21:37');
 
 -- --------------------------------------------------------
 
@@ -74,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `pokemon` (
   `niveau` int(2) NOT NULL,
   `prix_vente` int(30) NOT NULL,
   `dresseurId` int(30) NOT NULL,
+  `disponibleEntrainement` tinyint(1) NOT NULL,
   PRIMARY KEY (`idP`),
   KEY `dresseurId_const` (`dresseurId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -291,6 +291,23 @@ INSERT INTO `ref_pokemon_type` (`id`, `type_1`, `type_2`, `nom`, `evolution`, `s
 (149, 3, 18, 'Dracolosse', 0, 0, 'L'),
 (150, 13, 0, 'Mewtwo', 0, 0, 'L'),
 (151, 13, 0, 'Mew', 0, 0, 'P');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` json NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pieces` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées
