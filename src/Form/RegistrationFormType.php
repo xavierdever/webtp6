@@ -44,13 +44,14 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('starter', ChoiceType::class, [
-                'choices' => [
-                    'Bulbizarre' => 1,
-                    'Carapuce' => 7,
-                    'Salamèche' => 4,
-                    ],
-                ])
+
+//            ->add('starter', ChoiceType::class, [
+//                'choices' => [
+//                    'Bulbizarre' => 1,
+//                    'Carapuce' => 7,
+//                    'Salamèche' => 4,
+//                    ],
+//                ])
         ;
     }
 
