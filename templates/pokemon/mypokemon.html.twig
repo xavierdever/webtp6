@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 80%;margin: auto">
+        <div class="card-body">
+            <h5 class="card-title">Liste de mes pokemons</h5>
+            <table class="table table-striped">
+                <thead>
+                <th><center>Nom</center></th>
+                <th><center>Sexe</center></th>
+                <th><center>Niveau</center></th>
+                <th><center>Détails</center></th>
+                </thead>
+                <tbody>
+                {% for row in pokemons %}
+                <tr>
+                <td><center>{{row['nom']}}</center></td>
+                <td><center>{{row['sexe']}}</center></td>
+                <td><center>{{row['niveau']}}</center></td>
+                </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -12,7 +12,7 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-<center>
+<div style="text-align: center;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand centre" href="index.php">Pokédex</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,6 +41,10 @@
                         </li>
 
                     {% elseif app.user %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_my_pokemon') }}">Mes Pokémon</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                         </li>
@@ -50,7 +54,7 @@
             </div>
         </div>
     </nav>
-</center>
+</div>
 <div class="card" style="width: 80%;margin: auto">
     <div class="card-body">
         {% block body %}{% endblock %}
