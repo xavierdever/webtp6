@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\RefPokemonType;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -50,16 +51,20 @@ class RegistrationController extends AbstractController
                 $dressId = $dresseur[0]->getId();
                 $pokemon = new Pokemon();
 
+                $espece = $this
+                    ->getDoctrine()
+                    ->getRepository(RefPokemonType::class)
+                    ->find((int) $form->get('starter')->getData());
 
-
-                $pokemon->setNom($form->get('starter')->getData());
+                dump($espece);
+                $pokemon->setNom($espece->getNom());
                 $pokemon->setDresseurid($dressId);
                 $pokemon->setXp(0);
                 $pokemon->setNiveau(0);
                 $pokemon->setPrixVente(0);
                 $pokemon->setDisponibleEntrainement(true);
                 $pokemon->setSexe('F');
-                $pokemon->setIdEspece(0);
+                $pokemon->setIdEspece($espece->getId());
                 $entityManager->persist($pokemon);
                 $entityManager->flush();
 
