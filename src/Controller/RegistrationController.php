@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\Mapping as ORM;
+
+
+use App\Entity\Pokemon;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\RefPokemonTypeRepository;
 use App\Security\PokegameAuthenticator;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends AbstractController
 {
@@ -24,12 +29,13 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
             $user->setRoles(['ROLE_USER']);
@@ -37,6 +43,26 @@ class RegistrationController extends AbstractController
             try {
                 $entityManager->persist($user);
                 $entityManager->flush();
+                $dresseur = $this->
+                getDoctrine()
+                    ->getRepository(User::class)
+                    ->findBy(['username' =>  $form->get('username')->getData()]);
+                $dressId = $dresseur[0]->getId();
+                $pokemon = new Pokemon();
+
+
+
+                $pokemon->setNom($form->get('starter')->getData());
+                $pokemon->setDresseurid($dressId);
+                $pokemon->setXp(0);
+                $pokemon->setNiveau(0);
+                $pokemon->setPrixVente(0);
+                $pokemon->setDisponibleEntrainement(true);
+                $pokemon->setSexe('F');
+                $pokemon->setIdEspece(0);
+                $entityManager->persist($pokemon);
+                $entityManager->flush();
+
 
             } catch (UniqueConstraintViolationException $exception) {
                 return $this->render('registration/register_error.html.twig', [

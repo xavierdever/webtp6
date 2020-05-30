@@ -70,6 +70,11 @@ class Pokemon
      */
     private $disponibleEntrainement;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $idEspece;
+
 
     public function getIdp(): ?int
     {
@@ -156,6 +161,18 @@ class Pokemon
     public function setDisponibleEntrainement(bool $disponibleEntrainement): self
     {
         $this->disponibleEntrainement = $disponibleEntrainement;
+
+        return $this;
+    }
+
+    public function getIdEspece(): ?int
+    {
+        return $this->idEspece;
+    }
+
+    public function setIdEspece(int $idEspece): self
+    {
+        $this->idEspece = $idEspece;
 
         return $this;
     }

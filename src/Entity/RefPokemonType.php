@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RefPokemonType
  *
  * @ORM\Table(name="ref_pokemon_type", indexes={@ORM\Index(name="IDX_5483EF99564D586", columns={"type_2"}), @ORM\Index(name="IDX_5483EF999C6D843C", columns={"type_1"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\RefPokemonTypeRepository")
  */
 class RefPokemonType
 {
