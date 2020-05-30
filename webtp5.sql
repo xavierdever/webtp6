@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 19 mai 2020 à 10:41
+-- Généré le :  sam. 30 mai 2020 à 10:16
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `dresseur`;
 CREATE TABLE IF NOT EXISTS `dresseur` (
-  `id` int(30) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(30) NOT NULL,
-  `mail` varchar(30) NOT NULL,
-  `mdp` varchar(100) NOT NULL,
-  `pieces` int(100) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mdp` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pieces` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,10 @@ CREATE TABLE IF NOT EXISTS `migration_versions` (
 --
 
 INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
-('20200519102046', '2020-05-19 10:21:37');
+('20200519102046', '2020-05-19 10:21:37'),
+('20200527200657', '2020-05-27 20:07:13'),
+('20200529114416', '2020-05-29 11:44:27'),
+('20200530093755', '2020-05-30 09:38:04');
 
 -- --------------------------------------------------------
 
@@ -74,9 +77,18 @@ CREATE TABLE IF NOT EXISTS `pokemon` (
   `prix_vente` int(30) NOT NULL,
   `dresseurId` int(30) NOT NULL,
   `disponibleEntrainement` tinyint(1) NOT NULL,
+  `id_espece` int(11) NOT NULL,
   PRIMARY KEY (`idP`),
   KEY `dresseurId_const` (`dresseurId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `pokemon`
+--
+
+INSERT INTO `pokemon` (`idP`, `nom`, `sexe`, `xp`, `niveau`, `prix_vente`, `dresseurId`, `disponibleEntrainement`, `id_espece`) VALUES
+(1, 'Carapuce', 'F', 0, 0, 0, 1, 1, 7),
+(2, 'Bulbizarre', 'F', 0, 0, 0, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -307,7 +319,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `pieces` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `roles`, `password`, `pieces`) VALUES
+(1, 'nicolas', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$RGQwZWdrbkJGZlVtdGhrNg$dgOf4FJ2hFV6R9HcDfPKVe9E/O9t7JUymBWtJtv7hCo', NULL),
+(2, 'xavierdvn', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$MG9hMU45OGxWOGRCbU9xLw$k0vUQEZbEYYlWm0qYnN+l8OGGZ47/umCRuXZMNFq7fw', NULL);
 
 --
 -- Contraintes pour les tables déchargées
