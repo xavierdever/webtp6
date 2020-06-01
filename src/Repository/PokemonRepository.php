@@ -22,6 +22,19 @@ class PokemonRepository extends ServiceEntityRepository
     // /**
     //  * @return Pokemon[] Returns an array of Pokemon objects
     //  */
+
+    public function getPokemonByDresseurId($dresseurId){
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM pokemon WHERE dresseurId ='. $dresseurId;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+    // /**
+    //  * @return Pokemon[] Returns an array of Pokemon objects
+    //  */
     /*
     public function findByExampleField($value)
     {
