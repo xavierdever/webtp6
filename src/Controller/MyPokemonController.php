@@ -30,7 +30,7 @@ class MyPokemonController extends AbstractController
     }
 
     /**
-     * @Route("/{idp}", name="my_pokemon_detail", methods={"GET", "POST"})
+     * @Route("/{idp}", name="my_pokemon_show", methods={"GET", "POST"})
      */
     public function show(Pokemon $pokemon): Response
     {
