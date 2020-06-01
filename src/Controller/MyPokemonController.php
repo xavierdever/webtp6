@@ -76,13 +76,6 @@ class MyPokemonController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    /**
-     * @Route("/{idp}/train", name="my_pokemon_edit", methods={"GET","POST"})
-     */
-    public function train(Request $request, Pokemon $pokemon): Response
-    {
-
-    }
 
 
     /**
