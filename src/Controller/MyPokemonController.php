@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
+
 
 
 class MyPokemonController extends AbstractController
@@ -27,9 +30,10 @@ class MyPokemonController extends AbstractController
     }
 
     /**
-     * @Route("/{idp}", name="my_pokemon_detail", methods={"GET"})
+     * @Route("/{idp}", name="my_pokemon_detail", methods={"GET", "POST"})
+     * @ParamConverter("pokemon", options={"idp" = "idP"})
      */
-    public function showDetail(Pokemon $pokemon): Response
+    public function show(Pokemon $pokemon): Response
     {
         return $this->render('pokemon/show.html.twig', [
             'pokemon' => $pokemon,
@@ -38,6 +42,7 @@ class MyPokemonController extends AbstractController
 
     /**
      * @Route("/{idp}/edit", name="my_pokemon_edit", methods={"GET","POST"})
+     * @ParamConverter("pokemon", options={"idp" = "idP"})
      */
     public function edit(Request $request, Pokemon $pokemon): Response
     {

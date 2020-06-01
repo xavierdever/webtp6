@@ -25,8 +25,7 @@ class EntityRepository extends ServiceEntityRepository
      */
     public function getStatsByType(){
         $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT libelle as type, nb FROM ((SELECT type_1 as type, count(type_1) as nb from ref_pokemon_type GROUP BY type_1)
-UNION
+        $sql = 'SELECT libelle as type, nb FROM ((SELECT type_1 as type, count(type_1) as nb from ref_pokemon_type GROUP BY type_1) UNION
 (SELECT type_2 as type, count(type_2) as nb from ref_pokemon_type GROUP BY type_2)) as tab LEFT JOIN ref_elementary_type on type = id WHERE nb > 0';
 
         $stmt = $conn->prepare($sql);
