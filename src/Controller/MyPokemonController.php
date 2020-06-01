@@ -26,5 +26,49 @@ class MyPokemonController extends AbstractController
             'pokemons' => $pokemons]);
     }
 
+    /**
+     * @Route("/{idp}", name="my_pokemon_show", methods={"GET"})
+     */
+    public function show(Pokemon $pokemon): Response
+    {
+        return $this->render('pokemon/pokemondetail.html.twig', [
+            'pokemon' => $pokemon,
+        ]);
+    }
+
+    /**
+     * @Route("/{idp}/edit", name="my_pokemon_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Pokemon $pokemon): Response
+    {
+        $form = $this->createForm(PokemonType::class, $pokemon);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('app_my_pokemon');
+        }
+
+        return $this->render('pokemon/edit.html.twig', [
+            'pokemon' => $pokemon,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{idp}", name="my_pokemon_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Pokemon $pokemon): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$pokemon->getIdp(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($pokemon);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_my_pokemon');
+    }
+
 
 }

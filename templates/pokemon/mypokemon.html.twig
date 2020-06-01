@@ -19,6 +19,10 @@
                 <td><center>{{row['nom']}}</center></td>
                 <td><center>{{row['sexe']}}</center></td>
                 <td><center>{{row['niveau']}}</center></td>
+                <td>
+                    <a href="{{ path('my_pokemon_show', {'idp': row.idP}) }}">show</a>
+                    <a href="{{ path('my_pokemon_edit', {'idp': row.idP}) }}">edit</a>
+                </td>
                 </tr>
 
                 </tbody>
