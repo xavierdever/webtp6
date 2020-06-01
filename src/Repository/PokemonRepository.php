@@ -31,6 +31,14 @@ class PokemonRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     }
 
+    public function getPokemonReadyForCapture($dresseurId) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM pokemon WHERE disponibleEntrainement = 1 AND dresseurId ='. $dresseurId;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 
     // /**
     //  * @return Pokemon[] Returns an array of Pokemon objects

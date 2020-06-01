@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokemons disponibles{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {{ form_start(captureForm) }}
+    {{ form_row(registrationForm.pokemon_capture) }}
+    {{ form_row(registrationForm.zone) }}
+
+    <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

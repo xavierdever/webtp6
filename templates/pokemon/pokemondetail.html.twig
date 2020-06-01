@@ -1,20 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pokemon{% endblock %}
 
 {% block body %}
-    <h1>Pokemon</h1>
+    <h1>{{ pokemon.nom }}</h1>
 
     <table class="table">
         <tbody>
-        <tr>
-            <th>Idp</th>
-            <td>{{ pokemon.idp }}</td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td>{{ pokemon.nom }}</td>
-        </tr>
         <tr>
             <th>Sexe</th>
             <td>{{ pokemon.sexe }}</td>
@@ -32,12 +23,22 @@
             <td>{{ pokemon.prixVente }}</td>
         </tr>
         <tr>
-            <th>Dresseurid</th>
-            <td>{{ pokemon.dresseurid }}</td>
-        </tr>
-        <tr>
             <th>DisponibleEntrainement</th>
             <td>{{ pokemon.disponibleEntrainement ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th>Type 1</th>
+            <td>{{ type1}}</td>
+        </tr>
+        {% if type2 %}
+            <tr>
+                <th>Type 2</th>
+                <td>{{ type2}}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th>Type Courbe</th>
+            <td>{{ espece.typeCourbeNiveau}}</td>
         </tr>
         </tbody>
     </table>

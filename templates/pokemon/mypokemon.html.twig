@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}My Pokemons{% endblock %}
 
 {% block body %}
     <div class="card" style="width: 80%;margin: auto">
@@ -20,13 +20,17 @@
                 <td><center>{{row['sexe']}}</center></td>
                 <td><center>{{row['niveau']}}</center></td>
                 <td>
-                    <a href="{{ path('my_pokemon_show', {'idp': row.idP}) }}">show</a>
-                    <a href="{{ path('my_pokemon_edit', {'idp': row.idP}) }}">edit</a>
+                    <a href="{{ path('my_pokemon_show', {'idp': row.idp}) }}">show</a>
+                    <a href="{{ path('my_pokemon_edit', {'idp': row.idp}) }}">edit</a>
                 </td>
                 </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
 
                 </tbody>
-                {% endfor %}
             </table>
         </div>
     </div>
