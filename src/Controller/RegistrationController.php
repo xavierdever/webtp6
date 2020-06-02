@@ -63,7 +63,6 @@ class RegistrationController extends AbstractController
                 $pokemon->setXp(0);
                 $pokemon->setNiveau(1);
                 $pokemon->setPrixVente(0);
-                $pokemon->setDisponibleEntrainement(true);
                 $date = new DateTime();
                 $date->format('d/m/Y H:i:s');
                 $pokemon->setDerniereChasse($date);

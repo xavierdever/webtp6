@@ -15,7 +15,6 @@
                 <th>Niveau</th>
                 <th>PrixVente</th>
                 <th>Dresseurid</th>
-                <th>DisponibleEntrainement</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{ pokemon.niveau }}</td>
                 <td>{{ pokemon.prixVente }}</td>
                 <td>{{ pokemon.dresseurid }}</td>
-                <td>{{ pokemon.disponibleEntrainement ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('pokemon_show', {'idp': pokemon.idp}) }}">show</a>
                     <a href="{{ path('pokemon_edit', {'idp': pokemon.idp}) }}">edit</a>

@@ -70,6 +70,8 @@ class MyPokemonController extends AbstractController
         $form = $this->createForm(PokemonType::class, $pokemon);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

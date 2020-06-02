@@ -18,7 +18,6 @@ class PokemonType extends AbstractType
             ->add('niveau')
             ->add('prixVente')
             ->add('dresseurid')
-            ->add('disponibleEntrainement')
         ;
     }
 

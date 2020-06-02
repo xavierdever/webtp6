@@ -216,17 +216,6 @@ class Pokemon
         return $this;
     }
 
-    public function getDisponibleEntrainement(): ?bool
-    {
-        return $this->disponibleEntrainement;
-    }
-
-    public function setDisponibleEntrainement(bool $disponibleEntrainement): self
-    {
-        $this->disponibleEntrainement = $disponibleEntrainement;
-
-        return $this;
-    }
 
     public function getIdEspece(): ?int
     {
