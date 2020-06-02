@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 01 juin 2020 à 18:30
+-- Généré le :  mar. 02 juin 2020 à 19:32
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -63,7 +63,9 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 ('20200601143252', '2020-06-01 14:33:00'),
 ('20200601143451', '2020-06-01 14:34:57'),
 ('20200601151143', '2020-06-01 15:12:30'),
-('20200601151838', '2020-06-01 15:18:44');
+('20200601151838', '2020-06-01 15:18:44'),
+('20200602174506', '2020-06-02 17:45:17'),
+('20200602184112', '2020-06-02 18:41:22');
 
 -- --------------------------------------------------------
 
@@ -80,19 +82,27 @@ CREATE TABLE IF NOT EXISTS `pokemon` (
   `niveau` int(2) NOT NULL,
   `prix_vente` int(30) NOT NULL,
   `dresseurId` int(30) NOT NULL,
-  `disponibleEntrainement` tinyint(1) NOT NULL,
   `id_espece` int(11) NOT NULL,
+  `derniereChasse` datetime NOT NULL,
+  `dernierEntrainement` datetime NOT NULL,
   PRIMARY KEY (`idp`),
   KEY `dresseurId_const` (`dresseurId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `pokemon`
 --
 
-INSERT INTO `pokemon` (`idp`, `nom`, `sexe`, `xp`, `niveau`, `prix_vente`, `dresseurId`, `disponibleEntrainement`, `id_espece`) VALUES
-(1, 'Carapuce', 'F', 0, 0, 0, 1, 1, 7),
-(2, 'Bulbizarre', 'F', 0, 0, 0, 2, 1, 1);
+INSERT INTO `pokemon` (`idp`, `nom`, `sexe`, `xp`, `niveau`, `prix_vente`, `dresseurId`, `id_espece`, `derniereChasse`, `dernierEntrainement`) VALUES
+(1, 'Carapuce', 'F', 0, 0, 0, 1, 7, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(2, 'Bulbizarre', 'F', 0, 0, 0, 2, 1, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(3, 'Dardargnan', 'F', 0, 1, 0, 2, 15, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(4, 'I0sÃ©cateur', 'F', 0, 1, 0, 2, 123, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(5, 'Paras', 'F', 0, 1, 0, 2, 46, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(6, 'Ca0i0os', 'F', 0, 1, 0, 2, 58, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(7, 'Galopa', 'F', 0, 1, 0, 2, 78, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(8, 'Papilusion', 'F', 0, 1, 0, 2, 12, '2020-06-02 17:08:00', '2020-06-02 17:08:00'),
+(9, '0oeu0oeuf', 'M', 0, 1, 0, 2, 102, '2020-06-02 18:49:29', '2020-06-02 17:08:00');
 
 -- --------------------------------------------------------
 
@@ -327,28 +337,28 @@ CREATE TABLE IF NOT EXISTS `type_by_zone` (
 
 INSERT INTO `type_by_zone` (`id_zone_capture`, `id_type`) VALUES
 (1, 1),
-(2, 3),
-(3, 1),
+(1, 3),
+(1, 7),
+(1, 9),
+(1, 13),
+(2, 6),
+(2, 9),
+(2, 10),
+(2, 14),
+(2, 16),
+(2, 17),
+(2, 18),
+(3, 2),
 (3, 5),
-(4, 5),
+(3, 9),
+(3, 12),
+(4, 8),
+(4, 9),
+(4, 16),
 (5, 3),
-(6, 2),
-(7, 1),
-(8, 4),
-(9, 1),
-(9, 2),
-(9, 3),
-(9, 4),
-(9, 5),
-(10, 2),
-(11, 5),
-(12, 3),
-(13, 1),
-(14, 2),
-(16, 2),
-(16, 4),
-(17, 2),
-(18, 2);
+(5, 4),
+(5, 9),
+(5, 11);
 
 -- --------------------------------------------------------
 
