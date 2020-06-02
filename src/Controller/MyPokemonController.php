@@ -48,11 +48,16 @@ class MyPokemonController extends AbstractController
         }
         else
             $type2 = null;
+        $derniereChasse = $pokemon->getDerniereChasse()->format('d/m/Y H:i:s');
+        $dernierEntrainement = $pokemon->getDernierEntrainement()->format('d/m/Y H:i:s');
+
         return $this->render('pokemon/pokemondetail.html.twig', [
             'pokemon' => $pokemon,
             'espece' => $espece,
             'type1' => $type1,
-            'type2' => $type2
+            'type2' => $type2,
+            'dernierEntrainement' => $dernierEntrainement,
+            'derniereChasse' => $derniereChasse,
         ]);
 
     }

@@ -8,7 +8,7 @@ use App\Repository\PokemonRepository;
 use App\Entity\User;
 use App\Entity\Pokemon;
 use App\Entity\RefPokemonType;
-
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Form\CaptureType;
@@ -57,8 +57,11 @@ class CaptureController extends AbstractController
            $newPokemon->setXp(0);
            $newPokemon->setNiveau(1);
            $newPokemon->setPrixVente(0);
-           $newPokemon->setDisponibleEntrainement(true);
-           $sexe = rand(0,2);
+           $date = new DateTime();
+           $date->format('d/m/Y H:i:s');
+           $newPokemon->setDerniereChasse($date);
+           $newPokemon->setDernierEntrainement($date);
+           $sexe = rand(0,1);
            if ($sexe == 1) {
                 $newPokemon->setSexe('F');
            }

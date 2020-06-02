@@ -23,10 +23,6 @@
             <td>{{ pokemon.prixVente }}</td>
         </tr>
         <tr>
-            <th>DisponibleEntrainement</th>
-            <td>{{ pokemon.disponibleEntrainement ? 'Yes' : 'No' }}</td>
-        </tr>
-        <tr>
             <th>Type 1</th>
             <td>{{ type1}}</td>
         </tr>
@@ -39,6 +35,14 @@
         <tr>
             <th>Type Courbe</th>
             <td>{{ espece.typeCourbeNiveau}}</td>
+        </tr>
+        <tr>
+            <th>Derniere Chasse</th>
+            <td>{{derniereChasse }}</td>
+        </tr>
+        <tr>
+            <th>Dernier Entrainement</th>
+            <td>{{dernierEntrainement }}</td>
         </tr>
         </tbody>
     </table>

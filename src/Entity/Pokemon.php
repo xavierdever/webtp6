@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -84,6 +85,41 @@ class Pokemon
      * @Assert\DateTime()
      */
     private $dernierEntrainement;
+
+    /**
+     * @return DateTime
+     */
+    public function getDerniereChasse(): DateTime
+    {
+        return $this->derniereChasse;
+    }
+
+    /**
+     * @param DateTime $derniereChasse
+     */
+    public function setDerniereChasse(DateTime $derniereChasse): void
+    {
+        $this->derniereChasse = $derniereChasse;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDernierEntrainement(): DateTime
+    {
+        return $this->dernierEntrainement;
+    }
+
+    /**
+     * @param DateTime $dernierEntrainement
+     */
+    public function setDernierEntrainement(DateTime $dernierEntrainement): void
+    {
+        $this->dernierEntrainement = $dernierEntrainement;
+    }
+
+
+
 
 
     /**

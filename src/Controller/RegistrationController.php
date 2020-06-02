@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RefPokemonType;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -63,6 +64,10 @@ class RegistrationController extends AbstractController
                 $pokemon->setNiveau(1);
                 $pokemon->setPrixVente(0);
                 $pokemon->setDisponibleEntrainement(true);
+                $date = new DateTime();
+                $date->format('d/m/Y H:i:s');
+                $pokemon->setDerniereChasse($date);
+                $pokemon->setDernierEntrainement($date);
                 $sexe = rand(0,1);
                 if ($sexe == 1) {
                     $pokemon->setSexe('F');
