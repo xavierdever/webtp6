@@ -33,11 +33,29 @@ class PokemonRepository extends ServiceEntityRepository
 
     public function getPokemonReadyForCapture($dresseurId) {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT * FROM pokemon WHERE disponibleEntrainement = 1 AND dresseurId ='. $dresseurId;
+        $sql = 'SELECT * FROM pokemon WHERE idp NOT IN (SELECT idp FROM pokemon WHERE dresseurId = 2 AND (derniereChasse > DATE_SUB(Now(), INTERVAL 1 HOUR))) AND dresseurId = ' .$dresseurId ;
+        $stmt= $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function updateDerniereChasse($idp) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'UPDATE POKEMON SET derniereChasse = Now() where idp =' . $idp;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function updateDernierEntrainement($idp) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'UPDATE POKEMON SET dernierEntrainement = Now() where idp =' . $idp;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
 
 
     // /**

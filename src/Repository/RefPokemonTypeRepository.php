@@ -19,6 +19,33 @@ class RefPokemonTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, RefPokemonType::class);
     }
 
+    public function getPokemonsTypeByZone($zoneId) {
+        $conn = $this->getEntityManager()->getConnection();
+        $req1 = "select t.id_type 
+                from ref_elementary_type as r, zone_capture as z, type_by_zone as t 
+                WHERE z.id = ". $zoneId . " and t.id_zone_capture = z.id and t.id_type = r.id 
+                GROUP BY (t.id_type) ORDER BY t.id_type ASC";
+        $stmt1 = $conn->prepare($req1);
+        $stmt1->execute();
+        $list = array();
+        foreach ($stmt1 as $row) {
+            $list[] = $row['id_type'];
+        }
+
+        $string = implode(",", $list);
+
+
+
+        $req2 = "SELECT * 
+                FROM ref_pokemon_type as r 
+                WHERE r.type_1 in (" . $string . ") or r.type_2 in (" . $string . ") 
+                GROUP by r.id";
+        $stmt2 = $conn->prepare($req2);
+        $stmt2->execute();
+        return $stmt2->fetchAll();
+
+    }
+
     // /**
     //  * @return RefPokemonType[] Returns an array of RefPokemonType objects
     //  */

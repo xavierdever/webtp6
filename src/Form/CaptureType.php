@@ -9,16 +9,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class CaptureType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options) : Response
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       $this->availablePokemons = $options['availablePokemons'];
        $builder
-           ->add('pokemon_capture', ChoiceType::class, [
+           ->add('pokemon', ChoiceType::class, [
                'mapped' => false,
-               'choices' => $this->availablePokemons
+               'choices' => array_flip($options['availablePokemons']),
+               'constraints' => [new Length(['min' => 1])],
+               'label' => 'Choisissez le pokemon disponible pour vous aider'
+
            ])
            ->add('zone', ChoiceType::class, [
                'mapped' => false,
@@ -29,6 +32,7 @@ class CaptureType extends AbstractType
                    'Forêt' => 4,
                    'Plage' => 5,
                ],
+               'label' => 'Choisissez la zone de capture'
            ])
        ;
     }
@@ -38,6 +42,7 @@ class CaptureType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Pokemon::class,
             'availablePokemons' => null
+
         ]);
     }
 }

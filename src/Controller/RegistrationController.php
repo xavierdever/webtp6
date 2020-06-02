@@ -60,11 +60,16 @@ class RegistrationController extends AbstractController
                 $pokemon->setNom($espece->getNom());
                 $pokemon->setDresseurid($dressId);
                 $pokemon->setXp(0);
-                $pokemon->setNiveau(0);
+                $pokemon->setNiveau(1);
                 $pokemon->setPrixVente(0);
                 $pokemon->setDisponibleEntrainement(true);
-                $pokemon->setSexe('F');
-                $pokemon->setIdEspece($espece->getId());
+                $sexe = rand(0,1);
+                if ($sexe == 1) {
+                    $pokemon->setSexe('F');
+                }
+                else {
+                    $pokemon->setSexe('M');
+                }                $pokemon->setIdEspece($espece->getId());
                 $entityManager->persist($pokemon);
                 $entityManager->flush();
 
