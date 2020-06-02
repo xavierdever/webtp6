@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pokemon
@@ -65,15 +66,41 @@ class Pokemon
 
 
     /**
-     * @var boolean
-     * @ORM\Column(name="disponibleEntrainement", type="boolean")
-     */
-    private $disponibleEntrainement;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $idEspece;
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="derniereChasse", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $derniereChasse;
+
+
+    /**
+     * @var DateTime
+     * @ORM\Column(name="dernierEntrainement", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $dernierEntrainement;
+
+
+    /**
+     * @return DateTime
+     */
+    public function getDateDerniereAction(): DateTime
+    {
+        return $this->dateDerniereAction;
+    }
+
+    /**
+     * @param DateTime $dateDerniereAction
+     */
+    public function setDateDerniereAction(DateTime $dateDerniereAction): void
+    {
+        $this->dateDerniereAction = $dateDerniereAction;
+    }
 
 
     public function getIdp(): ?int
