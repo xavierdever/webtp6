@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokemon{% endblock %}
+
+{% block body %}
+    <h1>Nouveau Pokemon : {{ pokemon.nom }}</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Nom</th>
+            <th>Sexe</th>
+            <th>Xp</th>
+            <th>Niveau</th>
+            <th>PrixVente</th>
+            <th>Derniere Chasse</th>
+            <th>Dernier Entrainement</th>
+
+        </tr>
+        <tr>
+            <td>{{ pokemon.nom }}</td>
+            <td>{{ pokemon.sexe }}</td>
+            <td>{{ pokemon.xp }}</td>
+            <td>{{ pokemon.niveau }}</td>
+            <td>{{ pokemon.prixVente }}</td>
+            {% if pokemon.derniereChasse %}
+                <td>{{ pokemon.derniereChasse|format_datetime('full', 'full', locale='fr') }}</td>
+            {% endif %}
+            {% if pokemon.dernierEntrainement %}
+                <td>{{ pokemon.dernierEntrainement|format_datetime('full', 'full', locale='fr') }}</td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_my_pokemon') }}">back to list</a>
+    <a href="{{ path('app_capture') }}">back to capture</a>
+
+
+{% endblock %}

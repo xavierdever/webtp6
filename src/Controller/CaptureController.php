@@ -30,6 +30,15 @@ class CaptureController extends AbstractController
         $dresseur = $this->getDoctrine()->getRepository(User::class)->findBy(['username' =>  $this->getUser()->getUsername()]);
         $dressId = $dresseur[0]->getId();
         $pokemons = $pokeRepository->getPokemonReadyForCapture($dressId);
+        dump(isset($pokemons));
+        dump(count($pokemons));
+
+        if (count($pokemons) == 0) {
+            return $this->render('pokemon/capture_error.html.twig', [
+                                'error' => 'Aucun pokemons disponible pour la capture'
+                            ]);
+        }
+
         $choices = array();
         foreach ($pokemons as $poke) {
             $choices[$poke['idp']] = $poke['nom'];
@@ -40,14 +49,12 @@ class CaptureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
            $zone =  dump($form->get('zone')->getData());
-           $pokemon = dump($form->get('pokemon')->getData());
+           $pokemonId = dump($form->get('pokemon')->getData());
 
            $list = $this->getDoctrine()->getRepository(RefPokemonType::class)->getPokemonsTypeByZone((int) $zone);
-           dump($list);
-           dump(count($list));
+
 
            $num = rand(0, count($list)-1);
-           dump($num);
            $entityManager = $this->getDoctrine()->getManager();
            $espece =  $list[$num];
            dump($espece);
@@ -57,7 +64,7 @@ class CaptureController extends AbstractController
            $newPokemon->setXp(0);
            $newPokemon->setNiveau(1);
            $newPokemon->setPrixVente(0);
-           $date = new DateTime();
+           $date = new DateTime('0/0/0 0:0:0');
            $date->format('d/m/Y H:i:s');
            $newPokemon->setDerniereChasse($date);
            $newPokemon->setDernierEntrainement($date);
@@ -71,6 +78,11 @@ class CaptureController extends AbstractController
            $newPokemon->setIdEspece($espece['id']);
            $entityManager->persist($newPokemon);
            $entityManager->flush();
+           $pokeRepository->updateDerniereChasse($pokemonId);
+            dump($newPokemon);
+           return $this->render('pokemon/capture_success.html.twig', [
+                               'pokemon' => $newPokemon
+                           ]);
         }
 
 
