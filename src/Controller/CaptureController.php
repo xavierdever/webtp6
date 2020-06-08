@@ -79,7 +79,7 @@ class CaptureController extends AbstractController
            $entityManager->persist($newPokemon);
            $entityManager->flush();
            $pokeRepository->updateDerniereChasse($pokemonId);
-            dump($newPokemon);
+           dump($newPokemon);
            return $this->render('pokemon/capture_success.html.twig', [
                                'pokemon' => $newPokemon
                            ]);
