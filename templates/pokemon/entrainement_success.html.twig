@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat Entraînement{% endblock %}
+
+{% block body %}
+    <h1>Pokemon : {{ pokemon.nom }}</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Nom</th>
+            <th>Type de courbe</th>
+            <th>Xp gagné</th>
+            <th>Xp actuel</th>
+            <th>Niveau</th>
+            <th>Prochain niveau dans</th>
+            <th>Derniere Chasse</th>
+            <th>Dernier Entrainement</th>
+
+        </tr>
+        <tr>
+            <td>{{ pokemon.nom }}</td>
+            <td>{{ typecourbe }}</td>
+            <td>{{ xpgagne }}</td>
+            <td>{{ pokemon.xp }}</td>
+            <td>{{ pokemon.niveau }}</td>
+            <td>{{ nextlevel }}</td>
+            {% if pokemon.derniereChasse %}
+                <td>{{ pokemon.derniereChasse|format_datetime('full', 'full', locale='fr') }}</td>
+            {% endif %}
+            {% if pokemon.dernierEntrainement %}
+                <td>{{ pokemon.dernierEntrainement|format_datetime('full', 'full', locale='fr') }}</td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_my_pokemon') }}">back to list</a>
+
+
+{% endblock %}

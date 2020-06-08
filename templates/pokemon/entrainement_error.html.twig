@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entraînement{% endblock %}
+
+{% block body %}
+    <h1>Entraîner un pokemon</h1>
+
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+
+    <div>
+        <button type="button" onclick="location.href='{{ path('app_my_pokemon') }}'" class="btn btn-primary btn-lg">Retour à "Mes Pokemons"</button>
+    </div>
+{% endblock %}

@@ -56,9 +56,42 @@ class PokemonRepository extends ServiceEntityRepository
         $stmt->execute();
     }
 
+    public function verifyIfPossibleToTrain($dresseurId, $idPoke) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT *
+                FROM pokemon
+                WHERE idp NOT IN
+                    (SELECT idp
+                     FROM pokemon
+                     WHERE (derniereChasse > DATE_SUB(Now(), INTERVAL 1 HOUR)))
+                  AND idp NOT IN
+                    (SELECT idp
+                     FROM pokemon
+                     WHERE (dernierEntrainement > DATE_SUB(Now(), INTERVAL 1 HOUR)))
+                  AND dresseurId = ' . $dresseurId . '
+                  AND idp = ' . $idPoke;
+        $stmt= $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function updateDernierEntrainement($idp) {
         $conn = $this->getEntityManager()->getConnection();
         $sql = 'UPDATE POKEMON SET dernierEntrainement = Now() where idp =' . $idp;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
+
+    public function updateXp($idp, $xp) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'UPDATE POKEMON SET xp =' . $xp . ' WHERE idp =' . $idp;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
+
+    public function updateNiveau($idp, $niveau) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'UPDATE POKEMON SET niveau =' . $niveau . ' WHERE idp =' . $idp;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
     }

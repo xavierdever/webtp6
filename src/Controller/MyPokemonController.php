@@ -84,6 +84,69 @@ class MyPokemonController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{idp}/train", name="my_pokemon_train", methods={"GET","POST"})
+     */
+    public function train(Request $request, Pokemon $pokemon, PokemonRepository $pokeRepository)
+    {
+        dump("LIGNE 1");
+        $espece = $this->getDoctrine()->getRepository(RefPokemonType::class)->find($pokemon->getIdEspece());
+
+        $courbeNiveau = $espece->getTypeCourbeNiveau();
+
+        dump($courbeNiveau);
+
+        $niveauActuel = $pokemon->getNiveau();
+        $niveauSuivant = $niveauActuel + 1;
+        $derniereChasse = $pokemon->getDerniereChasse()->format('d/m/Y H:i:s');
+        $dernierEntrainement = $pokemon->getDernierEntrainement()->format('d/m/Y H:i:s');
+
+
+        {#GERER LA VERIFICATION#}
+
+
+            switch ($courbeNiveau) {
+                case "R":
+                    $pallierNiveauSuivant = 0.8 * (pow($niveauSuivant, 3));
+                    break;
+                case "M":
+                    $pallierNiveauSuivant = pow($niveauSuivant, 3);
+                    break;
+                case "P":
+                    $pallierNiveauSuivant = 1.2 * (pow($niveauSuivant, 3)) - 15 * (pow($niveauSuivant, 2)) + 100 * $niveauSuivant - 140;
+                    break;
+                case "L":
+                    $pallierNiveauSuivant = 1.25 * (pow($niveauSuivant, 3));
+                    break;
+            }
+
+
+            $newXp = rand(10, 30);
+            $pokemon->setXp($pokemon->getXp() + $newXp);
+            $pokeRepository->updateXp($pokemon->getIdp(), $pokemon->getXp());
+
+            if ($pokemon->getXp() >= $pallierNiveauSuivant) {
+                $pokemon->setNiveau($niveauSuivant);
+                $pokeRepository->updateNiveau($pokemon->getIdp(), $niveauSuivant);
+            }
+
+            $nextLevel = $pallierNiveauSuivant - $pokemon->getXp();
+            $pokeRepository->updateDernierEntrainement($pokemon->getIdp());
+
+
+                return $this->render('pokemon/entrainement_success.html.twig', [
+                    'pokemon' => $pokemon,
+                    'typecourbe' => $courbeNiveau,
+                    'xpgagne' => $newXp,
+                    'nextLevel' => $nextLevel,
+                    'dernierEntrainement' => $dernierEntrainement,
+                    'derniereChasse' => $derniereChasse,
+                ]);
+            }
+        }
+
+
+
 
     /**
      * @Route("/{idp}", name="my_pokemon_delete", methods={"DELETE"})

@@ -44,6 +44,10 @@
             <th>Dernier Entrainement</th>
             <td>{{dernierEntrainement }}</td>
         </tr>
+        <tr>
+            <th>Entraînement</th>
+            <td><a href="{{ path('my_pokemon_train', {'idp': pokemon.idP}) }}">Entraîner</a></td>
+        </tr>
         </tbody>
     </table>
 
