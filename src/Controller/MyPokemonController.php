@@ -89,12 +89,9 @@ class MyPokemonController extends AbstractController
      */
     public function train(Request $request, Pokemon $pokemon, PokemonRepository $pokeRepository)
     {
-        dump("LIGNE 1");
         $espece = $this->getDoctrine()->getRepository(RefPokemonType::class)->find($pokemon->getIdEspece());
 
         $courbeNiveau = $espece->getTypeCourbeNiveau();
-
-        dump($courbeNiveau);
 
         $niveauActuel = $pokemon->getNiveau();
         $niveauSuivant = $niveauActuel + 1;
@@ -102,21 +99,27 @@ class MyPokemonController extends AbstractController
         $dernierEntrainement = $pokemon->getDernierEntrainement()->format('d/m/Y H:i:s');
 
 
-        {#GERER LA VERIFICATION#}
+        $possibleToTrain = $pokeRepository->verifyIfPossibleToTrain($pokemon->getIdp());
+
+        if (count($possibleToTrain) == 0) {
+            return $this->render('pokemon/entrainement_error.html.twig', [
+                'error' => 'Le Pokémon n\'est pas disponible pour l\'entraînement'
+            ]);
+        }
 
 
             switch ($courbeNiveau) {
                 case "R":
-                    $pallierNiveauSuivant = 0.8 * (pow($niveauSuivant, 3));
+                    $pallierNiveauSuivant = intval(0.8 * (pow($niveauSuivant, 3)));
                     break;
                 case "M":
-                    $pallierNiveauSuivant = pow($niveauSuivant, 3);
+                    $pallierNiveauSuivant = intval(pow($niveauSuivant, 3));
                     break;
                 case "P":
-                    $pallierNiveauSuivant = 1.2 * (pow($niveauSuivant, 3)) - 15 * (pow($niveauSuivant, 2)) + 100 * $niveauSuivant - 140;
+                    $pallierNiveauSuivant = intval(1.2 * (pow($niveauSuivant, 3)) - 15 * (pow($niveauSuivant, 2)) + 100 * $niveauSuivant - 140);
                     break;
                 case "L":
-                    $pallierNiveauSuivant = 1.25 * (pow($niveauSuivant, 3));
+                    $pallierNiveauSuivant = intval(1.25 * (pow($niveauSuivant, 3)));
                     break;
             }
 
@@ -132,7 +135,8 @@ class MyPokemonController extends AbstractController
 
             $nextLevel = $pallierNiveauSuivant - $pokemon->getXp();
             $pokeRepository->updateDernierEntrainement($pokemon->getIdp());
-
+            $p = $pokeRepository->findBy(['idp' => $pokemon->getIdp()]);
+            $dernierEntrainement = $p[0]    ->getDernierEntrainement();
 
                 return $this->render('pokemon/entrainement_success.html.twig', [
                     'pokemon' => $pokemon,
@@ -143,7 +147,6 @@ class MyPokemonController extends AbstractController
                     'derniereChasse' => $derniereChasse,
                 ]);
             }
-        }
 
 
 

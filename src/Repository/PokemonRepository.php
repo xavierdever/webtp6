@@ -56,7 +56,7 @@ class PokemonRepository extends ServiceEntityRepository
         $stmt->execute();
     }
 
-    public function verifyIfPossibleToTrain($dresseurId, $idPoke) {
+    public function verifyIfPossibleToTrain($idPoke) {
         $conn = $this->getEntityManager()->getConnection();
         $sql = 'SELECT *
                 FROM pokemon
@@ -68,7 +68,6 @@ class PokemonRepository extends ServiceEntityRepository
                     (SELECT idp
                      FROM pokemon
                      WHERE (dernierEntrainement > DATE_SUB(Now(), INTERVAL 1 HOUR)))
-                  AND dresseurId = ' . $dresseurId . '
                   AND idp = ' . $idPoke;
         $stmt= $conn->prepare($sql);
         $stmt->execute();
