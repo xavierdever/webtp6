@@ -108,45 +108,38 @@ class MyPokemonController extends AbstractController
         }
 
 
-            switch ($courbeNiveau) {
-                case "R":
-                    $pallierNiveauSuivant = intval(0.8 * (pow($niveauSuivant, 3)));
-                    break;
-                case "M":
-                    $pallierNiveauSuivant = intval(pow($niveauSuivant, 3));
-                    break;
-                case "P":
-                    $pallierNiveauSuivant = intval(1.2 * (pow($niveauSuivant, 3)) - 15 * (pow($niveauSuivant, 2)) + 100 * $niveauSuivant - 140);
-                    break;
-                case "L":
-                    $pallierNiveauSuivant = intval(1.25 * (pow($niveauSuivant, 3)));
-                    break;
+        $pallierNiveauSuivant = $this->getPallierNiveauSuivant($courbeNiveau, $niveauSuivant);
+
+        $newXp = rand(10, 30);
+        $pokemon->setXp($pokemon->getXp() + $newXp);
+        $pokeRepository->updateXp($pokemon->getIdp(), $pokemon->getXp());
+
+        while($pokemon->getXp() >= $pallierNiveauSuivant) {
+
+            $pallierNiveauSuivant = $this->getPallierNiveauSuivant($courbeNiveau, $niveauSuivant+1);
+            $pokemon->setNiveau($niveauSuivant);
+            $pokeRepository->updateNiveau($pokemon->getIdp(), $niveauSuivant);
+            if($pallierNiveauSuivant - $pokemon->getXp() > 0) {
+                break;
+            } else {
+                $niveauSuivant++;
             }
+        }
 
+        $nextLevel = $pallierNiveauSuivant - $pokemon->getXp();
+        $pokeRepository->updateDernierEntrainement($pokemon->getIdp());
+        $p = $pokeRepository->findBy(['idp' => $pokemon->getIdp()]);
+        $dernierEntrainement = $p[0]    ->getDernierEntrainement();
 
-            $newXp = rand(10, 30);
-            $pokemon->setXp($pokemon->getXp() + $newXp);
-            $pokeRepository->updateXp($pokemon->getIdp(), $pokemon->getXp());
-
-            if ($pokemon->getXp() >= $pallierNiveauSuivant) {
-                $pokemon->setNiveau($niveauSuivant);
-                $pokeRepository->updateNiveau($pokemon->getIdp(), $niveauSuivant);
-            }
-
-            $nextLevel = $pallierNiveauSuivant - $pokemon->getXp();
-            $pokeRepository->updateDernierEntrainement($pokemon->getIdp());
-            $p = $pokeRepository->findBy(['idp' => $pokemon->getIdp()]);
-            $dernierEntrainement = $p[0]    ->getDernierEntrainement();
-
-                return $this->render('pokemon/entrainement_success.html.twig', [
-                    'pokemon' => $pokemon,
-                    'typecourbe' => $courbeNiveau,
-                    'xpgagne' => $newXp,
-                    'nextLevel' => $nextLevel,
-                    'dernierEntrainement' => $dernierEntrainement,
-                    'derniereChasse' => $derniereChasse,
-                ]);
-            }
+            return $this->render('pokemon/entrainement_success.html.twig', [
+                'pokemon' => $pokemon,
+                'typecourbe' => $courbeNiveau,
+                'xpgagne' => $newXp,
+                'nextLevel' => $nextLevel,
+                'dernierEntrainement' => $dernierEntrainement,
+                'derniereChasse' => $derniereChasse,
+            ]);
+        }
 
 
 
@@ -165,7 +158,23 @@ class MyPokemonController extends AbstractController
         return $this->redirectToRoute('app_my_pokemon');
     }
 
-
+    public function getPallierNiveauSuivant(String $courbeNiveau, int $niveauSuivant) {
+        switch ($courbeNiveau) {
+            case "R":
+                $pallierNiveauSuivant = intval(0.8 * (pow($niveauSuivant, 3)));
+                break;
+            case "M":
+                $pallierNiveauSuivant = intval(pow($niveauSuivant, 3));
+                break;
+            case "P":
+                $pallierNiveauSuivant = intval(1.2 * (pow($niveauSuivant, 3)) - 15 * (pow($niveauSuivant, 2)) + 100 * $niveauSuivant - 140);
+                break;
+            case "L":
+                $pallierNiveauSuivant = intval(1.25 * (pow($niveauSuivant, 3)));
+                break;
+        }
+        return $pallierNiveauSuivant;
+    }
 
 
 }
