@@ -97,17 +97,13 @@ class MyPokemonController extends AbstractController
         $niveauSuivant = $niveauActuel + 1;
         $derniereChasse = $pokemon->getDerniereChasse()->format('d/m/Y H:i:s');
         $dernierEntrainement = $pokemon->getDernierEntrainement()->format('d/m/Y H:i:s');
-
-
-      /*  $possibleToTrain = $pokeRepository->verifyIfPossibleToTrain($pokemon->getIdp());
+        $possibleToTrain = $pokeRepository->verifyIfPossibleToTrain($pokemon->getIdp());
 
         if (count($possibleToTrain) == 0) {
             return $this->render('pokemon/entrainement_error.html.twig', [
                 'error' => 'Le Pokémon n\'est pas disponible pour l\'entraînement'
             ]);
         }
-      */
-
 
         $pallierNiveauSuivant = $this->getPallierNiveauSuivant($courbeNiveau, $niveauSuivant);
 
