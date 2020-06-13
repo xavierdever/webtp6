@@ -6,6 +6,8 @@ use App\Entity\Pokemon;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 
 class PokemonType extends AbstractType
 {
@@ -18,6 +20,10 @@ class PokemonType extends AbstractType
             ->add('niveau')
             ->add('prixVente')
             ->add('dresseurid')
+            ->add('estEnVente', CheckboxType::class, [
+                'label'    => 'Vendre le pokemon',
+                'required' => false,
+            ]);
         ;
     }
 
@@ -25,6 +31,7 @@ class PokemonType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Pokemon::class,
+            'validation_groups' => false,
         ]);
     }
 }

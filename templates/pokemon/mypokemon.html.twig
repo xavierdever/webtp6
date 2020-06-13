@@ -8,6 +8,7 @@
             <h5 class="card-title">Liste de mes pokemons</h5>
             <table class="table table-striped">
                 <thead>
+                <th></th>
                 <th><center>Nom</center></th>
                 <th><center>Sexe</center></th>
                 <th><center>Niveau</center></th>
@@ -16,14 +17,26 @@
                 <tbody>
                 {% for row in pokemons %}
                         <tr>
-                        <td><center>{{row['nom']}}</center></td>
-                        <td><center>{{row['sexe']}}</center></td>
-                        <td><center>{{row['niveau']}}</center></td>
+                            <td>
+                                <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ row['id_espece'] }}.png'>
+                            </td>
+                            <td><center>{{row['nom']}}</center></td>
+                            <td><center>{{row['sexe']}}</center></td>
+                            <td><center>{{row['niveau']}}</center></td>
 
                             <td>
-                            <a href="{{ path('my_pokemon_show', {'idp': row.idp}) }}">show</a>
-                            <a href="{{ path('my_pokemon_edit', {'idp': row.idp}) }}">edit</a>
-                        </td>
+                                <div class="row  justify-content-center">
+                                    <div class="md-5">
+                                        <button type="button" onclick="location.href='{{ path('my_pokemon_show', {'idp': row.idp}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA; ">Detail</button>
+                                    </div>
+                                    <div class="md-2">
+
+                                    </div>
+                                    <div class="md-5">
+                                        <button type="button" onclick="location.href='{{ path('my_pokemon_edit', {'idp': row.idp}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA;" >Editer</button>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                 {% else %}
                     <tr>

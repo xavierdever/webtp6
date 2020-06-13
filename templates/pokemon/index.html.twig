@@ -29,8 +29,14 @@
                 <td>{{ pokemon.prixVente }}</td>
                 <td>{{ pokemon.dresseurid }}</td>
                 <td>
-                    <a href="{{ path('pokemon_show', {'idp': pokemon.idp}) }}">show</a>
-                    <a href="{{ path('pokemon_edit', {'idp': pokemon.idp}) }}">edit</a>
+                    <div class="row">
+                        <div class="md-6">
+                            <button type="button" onclick="location.href='{{ path('pokemon_show', {'idp': pokemon.idp}) }}'" class="btn btn-primary btn-lg" style="color:#212529">Detail</button>
+                        </div>
+                        <div class="md-6">
+                            <button type="button" onclick="location.href='{{ path('pokemon_edit', {'idp': pokemon.idp}) }}'" class="btn btn-primary btn-lg" style="color:#212529">Editer</button>
+                        </div>
+                    </div>
                 </td>
             </tr>
         {% else %}

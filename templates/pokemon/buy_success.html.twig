@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokemon{% endblock %}
+
+{% block body %}
+    <h1>Nouveau Pokemon : {{ pokemon.nom }} acheté avec succès</h1>
+
+    <div>
+        <button type="button" onclick="location.href='{{ path('shop') }}'" class="btn btn-primary btn-lg">Retour au magasin</button>
+    </div>
+
+
+{% endblock %}

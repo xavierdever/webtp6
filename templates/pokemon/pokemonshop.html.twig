@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="card" style="width: 80%;margin: auto">
+        <div class="card-body">
+            <h5 class="card-title">Pokemons disponibles en vente</h5>
+            <table class="table table-striped">
+                <thead>
+                <th></th>
+                <th><center>Nom</center></th>
+                <th><center>Sexe</center></th>
+                <th><center>Niveau</center></th>
+                <th><center>Détails</center></th>
+                </thead>
+                <tbody>
+                {% for row in others_pokemons %}
+                    <tr>
+                        <td>
+                            <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ row['id_espece'] }}.png'>
+                        </td>
+                        <td><center>{{row['nom']}}</center></td>
+                        <td><center>{{row['sexe']}}</center></td>
+                        <td><center>{{row['niveau']}}</center></td>
+                        <td>
+                            <div class="row  justify-content-center">
+                                <div class="md-5">
+                                    <button type="button" onclick="location.href='{{ path('detail_shop_pokemon', {'idp': row.idp}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA; ">DETAIL</button>
+                                </div>
+                                <div class="md-2">
+
+                                </div>
+                                <div class="md-5">
+                                    <button type="button" onclick="location.href='{{ path('buy', {'idp': row.idp}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA;" >ACHETER</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <h5 class="card-title">Mes pokemons en vente</h5>
+            <table class="table table-striped">
+                <thead>
+                <th></th>
+                <th><center>Nom</center></th>
+                <th><center>Sexe</center></th>
+                <th><center>Niveau</center></th>
+                <th><center>Détails</center></th>
+                </thead>
+                <tbody>
+                {% for row in my_pokemons %}
+                    <tr>
+                        <td>
+                            <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ row['id_espece'] }}.png'>
+                        </td>
+                        <td><center>{{row['nom']}}</center></td>
+                        <td><center>{{row['sexe']}}</center></td>
+                        <td><center>{{row['niveau']}}</center></td>
+
+                        <td>
+                            <div>
+                                <button type="button" onclick="location.href='{{ path('detail_shop_pokemon', {'idp': row.idp}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA; ">DETAIL</button>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

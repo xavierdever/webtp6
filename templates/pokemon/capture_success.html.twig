@@ -33,8 +33,14 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_my_pokemon') }}">back to list</a>
-    <a href="{{ path('app_capture') }}">back to capture</a>
+    <div class="row">
+        <div class="md-6">
+            <button type="button" onclick="location.href='{{ path('app_my_pokemon') }}'" class="btn btn-primary btn-lg">Retour à Mes Pokemons</button>
+        </div>
+        <div class="md-6">
+            <button type="button" onclick="location.href='{{ path('app_capture') }}'" class="btn btn-primary btn-lg">Retour à la capture</button>
+        </div>
+    </div>
 
 
 {% endblock %}

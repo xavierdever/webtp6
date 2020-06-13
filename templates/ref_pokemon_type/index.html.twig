@@ -8,6 +8,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>Id</th>
                 <th>Type2</th>
                 <th>Nom</th>
@@ -20,6 +21,9 @@
         <tbody>
         {% for ref_pokemon_type in ref_pokemon_types %}
             <tr>
+                <td>
+                    <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ ref_pokemon_type.id }}.png'>
+                </td>
                 <td>{{ ref_pokemon_type.id }}</td>
                 <td>{{ ref_pokemon_type.type2 }}</td>
                 <td>{{ ref_pokemon_type.nom }}</td>
@@ -27,8 +31,17 @@
                 <td>{{ ref_pokemon_type.starter ? 'Yes' : 'No' }}</td>
                 <td>{{ ref_pokemon_type.typeCourbeNiveau }}</td>
                 <td>
-                    <a href="{{ path('ref_pokemon_type_show', {'id': ref_pokemon_type.id}) }}">show</a>
-                    <a href="{{ path('ref_pokemon_type_edit', {'id': ref_pokemon_type.id}) }}">edit</a>
+                    <div class="row  justify-content-center">
+                        <div class="md-5">
+                            <button type="button" onclick="location.href='{{ path('ref_pokemon_type_show', {'id': ref_pokemon_type.id}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA; ">Detail</button>
+                        </div>
+                        <div class="md-2">
+
+                        </div>
+                        <div class="md-5">
+                            <button type="button" onclick="location.href='{{ path('ref_pokemon_type_edit', {'id': ref_pokemon_type.id}) }}'" class="btn btn-primary btn-lg" style="color:#3B4CCA;" >Editer</button>
+                        </div>
+                    </div>
                 </td>
             </tr>
         {% else %}

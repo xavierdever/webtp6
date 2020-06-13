@@ -14,7 +14,7 @@
 <body>
 <div style="text-align: center;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand centre" href="index.php">Pokédex</a>
+        <a class="navbar-brand centre" href="{{ path('homepage') }}">Pokédex</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,9 +26,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('ref_pokemon_type_index') }}">Liste des Pokemons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('ref_pokemon_type_new') }}">Ajouter une Espèce Pokemon</a>
                     </li>
 
                     {% if not app.user %}
@@ -49,11 +46,11 @@
                             <a class="nav-link" href="{{ path('app_capture') }}">Capture</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ path('shop') }}">Acheter des pokemons</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                         </li>
-
-
-
 
                     {% endif %}
                 </ul>
@@ -69,7 +66,7 @@
 </div>
 <hr>
 <footer>
-    <p>Attrapez-les tous !</p>
+    <p style="text-align: center">Attrapez-les tous !</p>
 </footer>
 </body>
 </html>

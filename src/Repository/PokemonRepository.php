@@ -25,7 +25,7 @@ class PokemonRepository extends ServiceEntityRepository
 
     public function getPokemonByDresseurId($dresseurId){
         $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT * FROM pokemon WHERE dresseurId ='. $dresseurId;
+        $sql = 'SELECT * FROM pokemon WHERE est_en_vente = false AND dresseurId ='. $dresseurId;
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -95,7 +95,45 @@ class PokemonRepository extends ServiceEntityRepository
         $stmt->execute();
     }
 
+    public function getAvailableForSale($dresseurid) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM pokemon
+                WHERE dresseurId != ' . $dresseurid . '
+                AND est_en_vente = true';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
 
+    }
+
+    public function getMyPokemonsOnSale($dresseurid) {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * FROM pokemon
+                WHERE dresseurId = ' . $dresseurid . '
+                AND est_en_vente = true';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+    public function buyPokemon($dresseurId, $newStockPieces, $idp)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql1 = 'UPDATE Pokemon 
+                SET prix_vente = 0,
+                est_en_vente = false,
+                dresseurId = ' . $dresseurId . '
+                WHERE idp = ' . $idp;
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->execute();
+        $sql2 = 'UPDATE User
+                SET pieces =' . $newStockPieces . '
+                WHERE id = ' . $dresseurId;
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->execute();
+
+    }
 
 
     // /**

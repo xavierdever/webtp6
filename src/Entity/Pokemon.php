@@ -87,6 +87,11 @@ class Pokemon
     private $dernierEntrainement;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $estEnVente;
+
+    /**
      * @return DateTime
      */
     public function getDerniereChasse(): DateTime
@@ -225,6 +230,18 @@ class Pokemon
     public function setIdEspece(int $idEspece): self
     {
         $this->idEspece = $idEspece;
+
+        return $this;
+    }
+
+    public function getEstEnVente(): ?bool
+    {
+        return $this->estEnVente;
+    }
+
+    public function setEstEnVente(?bool $estEnVente): self
+    {
+        $this->estEnVente = $estEnVente;
 
         return $this;
     }

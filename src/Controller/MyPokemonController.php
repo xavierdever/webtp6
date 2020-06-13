@@ -70,11 +70,27 @@ class MyPokemonController extends AbstractController
         $form = $this->createForm(PokemonType::class, $pokemon);
         $form->handleRequest($request);
 
-
+        dump($pokemon);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            if ($form->get('estEnVente')->getData() == true && $pokemon->getPrixVente() > 0) {
+                $this->getDoctrine()->getManager()->flush();
+            }
+            else if ($form->get('estEnVente')->getData() == true && $pokemon->getPrixVente() == 0){
+                return $this->render('pokemon/edit_error.html.twig', [
+                    'pokemon' => $pokemon,
+                    'error' => 'Le prix doit être supérieur à 0'
+                ]);
+            }
+            else if ($form->get('estEnVente')->getData() == false  && $pokemon->getPrixVente() > 0) {
+                return $this->render('pokemon/edit_error.html.twig', [
+                    'pokemon' => $pokemon,
+                    'error' => 'Il faut cocher la case vente si vous souhaitez confirmer la vente du pokemon'
+                ]);
+            }
+            else  {
+                $this->getDoctrine()->getManager()->flush();
+            }
             return $this->redirectToRoute('app_my_pokemon');
         }
 
@@ -83,6 +99,34 @@ class MyPokemonController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{idp}/shop", name="detail_shop_pokemon", methods={"GET","POST"})
+     */
+    public function shop(Pokemon $pokemon)
+    {
+        $espece = $this->getDoctrine()->getRepository(RefPokemonType::class)->find($pokemon->getIdEspece());
+        $typeEntity1 = $this->getDoctrine()->getRepository(RefElementaryType::class)->find($espece->getType1());
+        $type1 = $typeEntity1->getLibelle();
+        if ($espece->getType2()) {
+            $typeEntity2 = $this->getDoctrine()->getRepository(RefElementaryType::class)->find($espece->getType2());
+            $type2 = $typeEntity2->getLibelle();
+        }
+        else
+            $type2 = null;
+        $derniereChasse = $pokemon->getDerniereChasse()->format('d/m/Y H:i:s');
+        $dernierEntrainement = $pokemon->getDernierEntrainement()->format('d/m/Y H:i:s');
+
+        return $this->render('pokemon/pokemondetailshop.html.twig', [
+            'pokemon' => $pokemon,
+            'espece' => $espece,
+            'type1' => $type1,
+            'type2' => $type2,
+            'dernierEntrainement' => $dernierEntrainement,
+            'derniereChasse' => $derniereChasse,
+        ]);
+    }
+
 
     /**
      * @Route("/{idp}/train", name="my_pokemon_train", methods={"GET","POST"})

@@ -42,9 +42,15 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_my_pokemon') }}">back to list</a>
-
-    <a href="{{ path('my_pokemon_edit', {'idp': pokemon.idp}) }}">edit</a>
 
     {{ include('pokemon/_delete_form.html.twig') }}
+
+    <div class="row">
+        <div class="md-6">
+            <button type="button" onclick="location.href='{{ path('app_my_pokemon') }}'" class="btn btn-primary btn-lg">Retour à Mes Pokemons</button>
+        </div>
+        <div class="md-6">
+            <button type="button" onclick="location.href='{{ path('my_pokemon_edit', {'idp': pokemon.idP}) }}'" class="btn btn-primary btn-lg">Editer</button>
+        </div>
+    </div>
 {% endblock %}

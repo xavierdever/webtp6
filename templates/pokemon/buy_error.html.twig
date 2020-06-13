@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Capture{% endblock %}
+
+{% block body %}
+    <h1>Acheter un pokemon</h1>
+
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+
+    <div>
+        <button type="button" onclick="location.href='{{ path('shop') }}'" class="btn btn-primary btn-lg">Retour à "Mes Pokemons"</button>
+    </div>
+{% endblock %}
