@@ -41,6 +41,7 @@ class RegistrationController extends AbstractController
                 )
             );
             $user->setRoles(['ROLE_USER']);
+            $user->setPieces(5000);
             $entityManager = $this->getDoctrine()->getManager();
             try {
                 $entityManager->persist($user);
@@ -73,7 +74,9 @@ class RegistrationController extends AbstractController
                 }
                 else {
                     $pokemon->setSexe('M');
-                }                $pokemon->setIdEspece($espece->getId());
+                }
+                $pokemon->setIdEspece($espece->getId());
+                $pokemon->setEstEnVente(false);
                 $entityManager->persist($pokemon);
                 $entityManager->flush();
 

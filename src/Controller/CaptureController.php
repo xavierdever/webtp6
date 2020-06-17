@@ -76,6 +76,7 @@ class CaptureController extends AbstractController
                 $newPokemon->setSexe('M');
            }
            $newPokemon->setIdEspece($espece['id']);
+           $newPokemon->setEstEnVente(false);
            $entityManager->persist($newPokemon);
            $entityManager->flush();
            $pokeRepository->updateDerniereChasse($pokemonId);
