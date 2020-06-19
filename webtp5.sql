@@ -2,10 +2,10 @@
 -- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 13 juin 2020 à 18:15
--- Version du serveur :  8.0.18
--- Version de PHP :  7.3.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jun 19, 2020 at 08:33 PM
+-- Server version: 8.0.18
+-- PHP Version: 7.4.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,40 +19,24 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `webtp5`
+-- Database: `webtp5`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `dresseur`
---
-
-DROP TABLE IF EXISTS `dresseur`;
-CREATE TABLE IF NOT EXISTS `dresseur` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mail` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mdp` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pieces` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `migration_versions`
+-- Table structure for table `migration_versions`
 --
 
 DROP TABLE IF EXISTS `migration_versions`;
 CREATE TABLE IF NOT EXISTS `migration_versions` (
-  `version` varchar(14) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version` varchar(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `executed_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `migration_versions`
+-- Dumping data for table `migration_versions`
 --
 
 INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
@@ -71,7 +55,7 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `pokemon`
+-- Table structure for table `pokemon`
 --
 
 DROP TABLE IF EXISTS `pokemon`;
@@ -89,69 +73,23 @@ CREATE TABLE IF NOT EXISTS `pokemon` (
   `est_en_vente` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idp`),
   KEY `dresseurId_const` (`dresseurId`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `pokemon`
---
-
-INSERT INTO `pokemon` (`idp`, `nom`, `sexe`, `xp`, `niveau`, `prix_vente`, `dresseurId`, `id_espece`, `derniereChasse`, `dernierEntrainement`, `est_en_vente`) VALUES
-(1, 'Carapuce', 'F', 0, 0, 0, 2, 7, '2020-06-13 19:29:16', '2020-06-02 17:08:00', 0),
-(2, 'Bulbizarre', 'F', 57, 3, 0, 5, 1, '2020-06-03 14:40:10', '2020-06-08 23:22:19', 0),
-(3, 'Dardargnan', 'F', 19, 2, 0, 5, 15, '2020-06-03 14:43:33', '2020-06-08 23:19:16', 0),
-(4, 'I0sÃ©cateur', 'F', 0, 1, 0, 5, 123, '2020-06-03 14:42:55', '2020-06-02 17:08:00', 0),
-(5, 'Paras', 'F', 0, 1, 0, 5, 46, '2020-06-02 21:36:32', '2020-06-02 17:08:00', 0),
-(6, 'Ca0i0os', 'F', 0, 1, 0, 2, 58, '2020-06-03 14:48:33', '2020-06-02 17:08:00', 0),
-(7, 'Galopa', 'F', 0, 1, 0, 2, 78, '2020-06-13 19:30:52', '2020-06-02 17:08:00', 0),
-(8, 'Papilusion', 'F', 37, 3, 0, 5, 12, '2020-06-03 14:49:50', '2020-06-08 23:21:24', 0),
-(9, '0oeu0oeuf', 'M', 0, 1, 0, 5, 102, '2020-06-02 18:49:29', '2020-06-02 17:08:00', 0),
-(10, 'Dardargnan', 'F', 0, 1, 0, 5, 15, '2020-06-03 14:42:23', '2020-06-02 19:44:43', 0),
-(11, 'Che0ipa0', 'F', 0, 1, 0, 2, 10, '2020-06-03 14:50:41', '2020-06-02 19:44:49', 0),
-(12, 'SalamÃ¨che', 'F', 0, 1, 0, 5, 4, '2020-06-03 14:51:39', '2020-06-02 21:14:00', 1),
-(13, 'Paras', 'M', 0, 1, 0, 2, 46, '2020-06-02 21:17:07', '2020-06-02 21:17:07', 0),
-(14, 'Papilusion', 'M', 0, 1, 0, 5, 12, '2020-06-03 14:49:27', '2020-06-02 21:19:02', 1),
-(15, 'Coconfort', 'M', 0, 1, 0, 5, 14, '2020-06-02 21:20:21', '2020-06-02 21:20:21', 1),
-(16, 'Paras', 'M', 0, 1, 0, 5, 46, '2020-06-03 14:45:30', '2020-06-02 21:20:32', 1),
-(17, 'Dracolosse', 'F', 0, 1, 0, 5, 149, '2020-06-02 21:20:36', '2020-06-02 21:20:36', 1),
-(18, 'Chrys1', 'M', 0, 1, 0, 5, 11, '2020-06-02 21:20:44', '2020-06-02 21:20:44', 1),
-(19, 'Galopa', 'F', 0, 1, 0, 5, 78, '2020-06-03 14:51:21', '2020-06-02 21:28:07', 1),
-(20, 'Soporifik', 'M', 0, 1, 0, 5, 96, '2020-06-02 21:36:13', '2020-06-02 21:36:13', 1),
-(21, 'Porygo0', 'F', 0, 1, 0, 5, 137, '2020-06-02 21:36:32', '2020-06-02 21:36:32', 1),
-(22, 'Rattatac', 'M', 0, 1, 0, 5, 20, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(23, 'Tauros', 'M', 0, 1, 0, 5, 128, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(24, 'Bulbizarre', 'F', 0, 1, 0, 5, 1, '2020-06-03 14:16:17', '2020-06-03 14:16:17', 1),
-(25, 'Abra', 'M', 0, 1, 0, 5, 63, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(26, 'Paras', 'F', 0, 1, 0, 5, 46, '2020-06-03 14:44:42', '1999-11-30 00:00:00', 1),
-(27, 'Scarabrute', 'M', 0, 1, 0, 5, 127, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(28, 'Ramoloss', 'F', 0, 1, 0, 5, 79, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(29, 'Noadkoko', 'F', 0, 1, 0, 5, 103, '2020-06-03 14:51:29', '1999-11-30 00:00:00', 1),
-(30, 'Dracolosse', 'M', 0, 1, 0, 5, 149, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(31, 'Mi0idraco', 'M', 13, 2, 0, 2, 147, '1999-11-30 00:00:00', '2020-06-13 20:06:15', 0),
-(32, 'Abra', 'M', 0, 1, 0, 5, 63, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(33, 'M. Mime', 'F', 0, 1, 0, 5, 122, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(34, 'Ramoloss', 'F', 0, 1, 0, 5, 79, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(35, 'Abra', 'F', 0, 1, 0, 5, 63, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(36, 'Dardargnan', 'M', 0, 1, 0, 5, 15, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(37, 'Ramoloss', 'F', 0, 1, 0, 5, 79, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(38, 'Bulbizarre', 'F', 0, 1, 0, 5, 1, '1999-11-30 00:00:00', '1999-11-30 00:00:00', 1),
-(39, 'Kadabra', 'F', 0, 1, 0, 2, 64, '1999-11-30 00:00:00', '1999-11-30 00:00:00', NULL),
-(40, 'I0sÃ©cateur', 'M', 0, 1, 0, 2, 123, '1999-11-30 00:00:00', '1999-11-30 00:00:00', NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ref_elementary_type`
+-- Table structure for table `ref_elementary_type`
 --
 
 DROP TABLE IF EXISTS `ref_elementary_type`;
 CREATE TABLE IF NOT EXISTS `ref_elementary_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `libelle` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `ref_elementary_type`
+-- Dumping data for table `ref_elementary_type`
 --
 
 INSERT INTO `ref_elementary_type` (`id`, `libelle`) VALUES
@@ -177,7 +115,7 @@ INSERT INTO `ref_elementary_type` (`id`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ref_pokemon_type`
+-- Table structure for table `ref_pokemon_type`
 --
 
 DROP TABLE IF EXISTS `ref_pokemon_type`;
@@ -185,17 +123,17 @@ CREATE TABLE IF NOT EXISTS `ref_pokemon_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type_1` int(11) DEFAULT NULL,
   `type_2` int(11) DEFAULT NULL,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `evolution` tinyint(1) NOT NULL,
   `starter` tinyint(1) NOT NULL,
-  `type_courbe_niveau` char(1) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type_courbe_niveau` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_5483EF999C6D843C` (`type_1`),
   KEY `IDX_5483EF99564D586` (`type_2`)
 ) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `ref_pokemon_type`
+-- Dumping data for table `ref_pokemon_type`
 --
 
 INSERT INTO `ref_pokemon_type` (`id`, `type_1`, `type_2`, `nom`, `evolution`, `starter`, `type_courbe_niveau`) VALUES
@@ -354,7 +292,7 @@ INSERT INTO `ref_pokemon_type` (`id`, `type_1`, `type_2`, `nom`, `evolution`, `s
 -- --------------------------------------------------------
 
 --
--- Structure de la table `type_by_zone`
+-- Table structure for table `type_by_zone`
 --
 
 DROP TABLE IF EXISTS `type_by_zone`;
@@ -365,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `type_by_zone` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `type_by_zone`
+-- Dumping data for table `type_by_zone`
 --
 
 INSERT INTO `type_by_zone` (`id_zone_capture`, `id_type`) VALUES
@@ -396,45 +334,35 @@ INSERT INTO `type_by_zone` (`id_zone_capture`, `id_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Table structure for table `user`
 --
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `pieces` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649F85E0677` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `user`
---
-
-INSERT INTO `user` (`id`, `username`, `roles`, `password`, `pieces`) VALUES
-(1, 'nicolas', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$RGQwZWdrbkJGZlVtdGhrNg$dgOf4FJ2hFV6R9HcDfPKVe9E/O9t7JUymBWtJtv7hCo', NULL),
-(2, 'xavierdvn', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$MG9hMU45OGxWOGRCbU9xLw$k0vUQEZbEYYlWm0qYnN+l8OGGZ47/umCRuXZMNFq7fw', 9700),
-(4, 'xavdv', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$Z1FGM2ZNNE9ocVZVODc2Ng$EZShrMRZeu+fvgA9XwSAiBR9isVK2S8tgAeDe8f5uD8', NULL),
-(5, 'alexis', '[\"ROLE_USER\"]', '$argon2id$v=19$m=65536,t=4,p=1$U0VpMzFwS2VMZzRVOTIuSQ$hm6RK0jUcMyseHq/p9zbelQKNsEZIuK9rXfd0LtOG7A', 8900);
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `zone_capture`
+-- Table structure for table `zone_capture`
 --
 
 DROP TABLE IF EXISTS `zone_capture`;
 CREATE TABLE IF NOT EXISTS `zone_capture` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `zone_capture`
+-- Dumping data for table `zone_capture`
 --
 
 INSERT INTO `zone_capture` (`id`, `nom`) VALUES
@@ -445,11 +373,11 @@ INSERT INTO `zone_capture` (`id`, `nom`) VALUES
 (5, 'plage');
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `ref_pokemon_type`
+-- Constraints for table `ref_pokemon_type`
 --
 ALTER TABLE `ref_pokemon_type`
   ADD CONSTRAINT `TYPE_CONSTRAINT1` FOREIGN KEY (`type_1`) REFERENCES `ref_elementary_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
