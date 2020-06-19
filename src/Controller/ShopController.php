@@ -46,7 +46,7 @@ class ShopController extends AbstractController
 
         if ($dresseur->getPieces() >= $pokemon->getPrixVente()) {
             $newStock = $dresseur->getPieces() - $pokemon->getPrixVente();
-            $pokeRepository->buyPokemon($dresseur->getId(), $newStock, $pokemon->getIdp());
+            $pokeRepository->buyPokemon($dresseur->getId(), $pokemon->getDresseurid() ,$newStock, $pokemon->getPrixVente(), $pokemon->getIdp());
 
             return $this->render('pokemon/buy_success.html.twig',[
                 'pokemon' => $pokemon

@@ -43,7 +43,9 @@ class PokemonRepository extends ServiceEntityRepository
                     (SELECT idp
                      FROM pokemon
                      WHERE (dernierEntrainement > DATE_SUB(Now(), INTERVAL 1 HOUR)))
-                  AND dresseurId = ' . $dresseurId ;
+                  AND est_en_vente = false
+                  AND dresseurId = ' . $dresseurId;
+
         $stmt= $conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -117,21 +119,26 @@ class PokemonRepository extends ServiceEntityRepository
     }
 
 
-    public function buyPokemon($dresseurId, $newStockPieces, $idp)
+    public function buyPokemon($dresseurId, $oldIdDresseur, $newStockPieces, $prixVente, $idp)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql1 = 'UPDATE Pokemon 
+        $sql1 = 'UPDATE User 
+                SET pieces = pieces + ' . $prixVente . '
+                WHERE id = ' . $oldIdDresseur;
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->execute();
+        $sql2 = 'UPDATE Pokemon 
                 SET prix_vente = 0,
                 est_en_vente = false,
                 dresseurId = ' . $dresseurId . '
                 WHERE idp = ' . $idp;
-        $stmt1 = $conn->prepare($sql1);
-        $stmt1->execute();
-        $sql2 = 'UPDATE User
-                SET pieces =' . $newStockPieces . '
-                WHERE id = ' . $dresseurId;
         $stmt2 = $conn->prepare($sql2);
         $stmt2->execute();
+        $sql3 = 'UPDATE User
+                SET pieces =' . $newStockPieces . '
+                WHERE id = ' . $dresseurId;
+        $stmt3 = $conn->prepare($sql3);
+        $stmt3->execute();
 
     }
 
